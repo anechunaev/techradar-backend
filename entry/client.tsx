@@ -1,6 +1,14 @@
-import 'isomorphic-fetch';
-
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import App from 'src/common/App';
 
-ReactDOM.render(App, document.getElementById('app'));
+type Options = {
+    reactRootId: string;
+    apiKey: string;
+    apiHost: string;
+};
+
+export function run({ reactRootId, apiKey, apiHost }: Options) {
+    console.log(`Running techradar with key ${apiKey} and host ${apiHost}`);
+
+    render(App, document.getElementById(reactRootId));
+}
