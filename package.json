@@ -5,12 +5,14 @@
   "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "cross-env webpack --mode development --config config/webpack/client.js",
-    "build": "cross-env webpack --mode production --config config/webpack/client.js",
-    "server-dev": "cross-env webpack --mode development --config config/webpack/server.js",
-    "server": "cross-env webpack --mode production --config config/webpack/server.js",
-    "start": "npm run build && npm run server && node dist/server.js",
-    "start-dev": "npm run build-dev && npm run server-dev && node-dev dist/server.js"
+    "client-dev": "cross-env ENV=development webpack --mode development --config config/webpack/client.js",
+    "client": "cross-env ENV=production webpack --mode production --config config/webpack/client.js",
+    "server-dev": "cross-env ENV=development webpack --mode development --config config/webpack/server.js",
+    "server": "cross-env ENV=production webpack --mode production --config config/webpack/server.js",
+    "build-dev": "npm run client-dev && npm run server-dev",
+    "build": "npm run client && npm run server",
+    "start-dev": "npm run build-dev && cross-env ENV=development node-dev dist/server.js",
+    "start": "npm run build && cross-env ENV=production node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +46,7 @@
     "express": "^4.16.2",
     "helmet": "^3.10.0",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.5",
     "morgan": "^1.9.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

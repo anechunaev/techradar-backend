@@ -14,7 +14,6 @@ router.all('/', (req, res, next) => {
 
 	if (req.query.key) {
 		response.data['key'] = req.query.key;
-		response.data['authorized'] = false;
 	}
 
 	res.json(response);

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as morgan from 'morgan';
-import { errorHandler } from './middlewares';
+import { errorHandler, locals } from './middlewares';
 import router from './routes';
 
 declare const process: any;
@@ -14,6 +14,7 @@ const ENV = process.env.ENV || 'production';
 //process.on('unhandledRejection', logToFile); // @TODO log errors to DB
 //process.on('uncaughtException', logToFile);
 
+app.use(locals({ environment: ENV, port: PORT }));
 app.use(morgan('tiny'));
 app.use('/', express.static('static'));
 app.use('/dist', express.static('dist'));

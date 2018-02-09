@@ -1,6 +1,8 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 // @ts-nocheck
 const path = require('path');
+const webpack = require('webpack');
+const pkg = require('../../package.json');
 
 module.exports = {
 	target: "web",
@@ -33,7 +35,11 @@ module.exports = {
 	},
 	context: path.resolve(__dirname, "../../"),
 	plugins: [
-
+		new webpack.DefinePlugin({
+			PRODUCTION: JSON.stringify(process.env.ENV === "production"),
+			DEVELOPMENT: JSON.stringify(process.env.ENV === "development"),
+			VERSION: JSON.stringify(pkg.version),
+		}),
 	],
 	parallelism: 2,
 	profile: true,
